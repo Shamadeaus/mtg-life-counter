@@ -1,11 +1,10 @@
 import React from 'react'
+import PlayerScoreCard from './components/PlayerScoreCard'
 
 class Home extends React.Component {
     render() {
         return (
-            <div>
-                Hello
-            </div>
+            <PlayerScoreCard/>
         )
     }
 }
