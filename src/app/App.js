@@ -1,22 +1,16 @@
 import React, {Component} from 'react'
-import AppBar from 'material-ui/AppBar'
-import Toolbar from 'material-ui/Toolbar'
-import Typography from 'material-ui/Typography'
-import IconButton from 'material-ui/IconButton'
-import MenuIcon from 'material-ui-icons/Menu'
-import GitHubIcon from '../GitHubIcon'
 import {MuiThemeProvider, createMuiTheme} from 'material-ui/styles'
 import {BrowserRouter, Route} from 'react-router-dom'
+import NavBar from './components/NavBar'
 import Routes from './routes'
 
 class App extends Component {
-    getRootStyle(theme) {
+    bodyStyle(theme) {
         return `
             body {
                 background-color: ${theme.palette.background.default};
                 margin: 0;
                 padding: 0;
-                overflow-x: hidden;
             }
         `
     }
@@ -26,23 +20,11 @@ class App extends Component {
 
         return (
             <React.Fragment>
-                <style>{this.getRootStyle(theme)}</style>
+                <style>{this.bodyStyle(theme)}</style>
                 <MuiThemeProvider theme={theme}>
                     <BrowserRouter>
                         <React.Fragment>
-                            <AppBar color='default' position='static'>
-                                <Toolbar>
-                                    <IconButton>
-                                        <MenuIcon/>
-                                    </IconButton>
-                                    <Typography variant='title' style={{flex: 1}}>
-                                        MTG Life Counter
-                                    </Typography>
-                                    <IconButton href='https://github.com/Shamadeaus/mtg-life-counter'>
-                                        <GitHubIcon/>
-                                    </IconButton>
-                                </Toolbar>
-                            </AppBar>
+                            <NavBar/>
                             {
                                 Routes.map(route =>
                                     <Route
