@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {MuiThemeProvider, createMuiTheme} from 'material-ui/styles'
-import {BrowserRouter, Route} from 'react-router-dom'
+import {HashRouter, Route} from 'react-router-dom'
 import NavBar from './components/NavBar'
 import Routes from './routes'
 
@@ -22,19 +22,20 @@ class App extends Component {
             <React.Fragment>
                 <style>{this.bodyStyle(theme)}</style>
                 <MuiThemeProvider theme={theme}>
-                    <BrowserRouter>
+                    <HashRouter>
                         <React.Fragment>
                             <NavBar/>
                             {
-                                Routes.map(route =>
+                                Routes.map((route, key) =>
                                     <Route
-                                        exact={route.exact}
+                                        key={key}
+                                        exact
                                         path={route.path}
                                         component={route.component}
                                     />)
                             }
                         </React.Fragment>
-                    </BrowserRouter>
+                    </HashRouter>
                 </MuiThemeProvider>
             </React.Fragment>
         )

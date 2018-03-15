@@ -6,6 +6,8 @@ import IconButton from 'material-ui/IconButton'
 import MenuIcon from 'material-ui-icons/Menu'
 import GitHubIcon from '../resources/GitHubIcon'
 import Drawer from 'material-ui/Drawer'
+import {MenuItem} from 'material-ui/Menu'
+import {ListItemText} from 'material-ui/List'
 import {withStyles} from 'material-ui/styles'
 
 class NavBar extends React.Component {
@@ -37,7 +39,14 @@ class NavBar extends React.Component {
                     open={this.state.open}
                     onClick={this.handleClick}
                 >
-
+                    <Toolbar className={classes.background}>
+                        <Typography>
+                            MTG Helper
+                        </Typography>
+                    </Toolbar>
+                    <MenuItem component='a' href='/#/'>
+                        <ListItemText primary='Life Counter'/>
+                    </MenuItem>
                 </Drawer>
             </React.Fragment>
         )
@@ -50,6 +59,9 @@ const styles = {
     },
     flex: {
         flex: 1
+    },
+    background: {
+        backgroundColor: '#000'
     }
 }
 
