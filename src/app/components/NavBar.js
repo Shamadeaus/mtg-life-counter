@@ -44,7 +44,7 @@ class NavBar extends React.Component {
                             MTG Helper
                         </Typography>
                     </Toolbar>
-                    <MenuItem component='a' href='/#/'>
+                    <MenuItem component='a' href='/#/lifeCounter'>
                         <ListItemText primary='Life Counter'/>
                     </MenuItem>
                 </Drawer>

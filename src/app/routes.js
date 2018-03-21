@@ -1,10 +1,10 @@
-import Home from './Home'
+import LifeCounter from './LifeCounter'
 import Test from './Test'
 
 export default [
     {
-        path: '/',
-        component: Home
+        path: '/lifeCounter',
+        component: LifeCounter
     },
     {
         path: '/test',
