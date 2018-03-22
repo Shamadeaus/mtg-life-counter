@@ -23,35 +23,34 @@ class PlayerScoreCard extends React.Component {
         return (
             <Card className={classes.card} {...props}>
                 <div>
-                    {
-                        !this.state.editing &&
-                        <div style={{display: 'flex', flexDirection: 'row'}}>
-                            <Typography variant='display1' style={{flex: 1}}>
-                                {this.state.username}
-                            </Typography>
-                            <IconButton onClick={this.handleEdit}>
-                                <EditIcon/>
-                            </IconButton>
-                        </div>
-                    }
-                    {
-                        this.state.editing &&
-                        <div style={{display: 'flex', flexDirection: 'row'}}>
-                            <Input
-                                classes={{
-                                    underline: classes.underLine,
-                                    input: classes.input
-                                }}
-                                defaultValue={this.state.username}
-                                inputProps={{
-                                    'aria-label': 'name',
-                                }}
-                            />
+                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                        <Typography variant='display1' className={this.state.editing ? classes.testHide : classes.testShow}>
+                            {this.state.username}
+                        </Typography>
+                        <Input
+                            classes={{
+                                input: classes.input,
+                                underline: this.state.editing ? classes.underlineShow : classes.underlineHide
+                            }}
+                            defaultValue={this.state.username}
+                            inputProps={{
+                                'aria-label': 'name',
+                            }}
+                        />
+
+                        {
+                            this.state.editing &&
                             <IconButton onClick={this.handleEdit}>
                                 <CloseIcon/>
                             </IconButton>
-                        </div>
-                    }
+                        }
+                        {
+                            !this.state.editing &&
+                            <IconButton onClick={this.handleEdit}>
+                                <EditIcon/>
+                            </IconButton>
+                        }
+                    </div>
                 </div>
                 <CardContent>
                     <Typography className={classes.life}>
@@ -92,9 +91,20 @@ class PlayerScoreCard extends React.Component {
 
 
 const styles = {
+    testShow: {
+        paddingLeft: '8px',
+        paddingTop: '4px',
+        display: 'inherit',
+        flex: 1,
+        transition: 'flex 500ms ease 250ms'
+    },
+    testHide: {
+        display: 'none',
+        flex: 0,
+        transition: 'flex 500ms ease 250ms'
+    },
     input: {
         flex: 1,
-        marginTop: '-8px',
         color: 'rgba(255, 255, 255, 0.7)',
         fontSize: '2.125rem',
         fontWeight: 400,
@@ -103,8 +113,15 @@ const styles = {
         marginLeft: '-.04em',
         padding: '0'
     },
-    underLine: {
-        
+    underlineShow: {
+        flex: 1,
+        transition: 'flex 500ms',
+        marginLeft: '8px'
+    },
+    underlineHide: {
+        flex: 0,
+        transition: 'flex 500ms',
+        marginLeft: '8px'
     },
     card: {
         width: 300,
