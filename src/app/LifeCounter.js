@@ -1,15 +1,12 @@
 import React from 'react'
 import PlayerScoreCard from './components/PlayerScoreCard'
-import Setup from './Setup'
+import SettingsButton from './SettingsButton'
+import Toolbar from 'material-ui/Toolbar'
+import Divider from 'material-ui/Divider'
 
 class LifeCounter extends React.Component {
     state = {
-        open: false,
         gameInfo: {}
-    }
-
-    handleClose = () => {
-        this.setState({open: false})
     }
 
     componentDidMount() {
@@ -17,20 +14,21 @@ class LifeCounter extends React.Component {
         if (Object.keys(this.state.gameInfo)[0]) {
             this.setState({gameInfo})
         }
-        this.setState({open: true})
     }
 
     render() {
-        if (this.state.gameInfo.id) {
-            return (
-                <PlayerScoreCard/>
-            )
-        }
-
         return (
-            <div>
-                <Setup open={this.state.open} onClose={this.handleClose}/>
-            </div>
+            <React.Fragment>
+                <Toolbar>
+                    <div style={{flex: 1}}/>
+                    <SettingsButton/>
+                </Toolbar>
+                <Divider/>
+                <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <PlayerScoreCard/>
+                    <PlayerScoreCard/>
+                </div>
+            </React.Fragment>
         )
     }
 }
