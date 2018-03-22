@@ -15,7 +15,11 @@ class PlayerScoreCard extends React.Component {
         username: 'Name'
     }
 
-    handleEdit = () => this.setState({editing: !this.state.editing})
+    handleEdit = () => {
+        this.state.editing ? this.input.blur() : this.input.focus()
+        this.setState({editing: !this.state.editing})
+    }
+    handleChange = event => this.setState({username: event.target.value})
 
     render() {
         const {classes, ...props} = this.props
@@ -23,30 +27,32 @@ class PlayerScoreCard extends React.Component {
         return (
             <Card className={classes.card} {...props}>
                 <div>
-                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <div style={{display: 'flex', flexDirection: 'row', position: 'relative'}}>
                         <Typography variant='display1' className={this.state.editing ? classes.testHide : classes.testShow}>
                             {this.state.username}
                         </Typography>
                         <Input
+                            inputRef={input => this.input = input}
+                            style={{width: '100%'}}
                             classes={{
                                 input: classes.input,
                                 underline: this.state.editing ? classes.underlineShow : classes.underlineHide
                             }}
-                            defaultValue={this.state.username}
+                            value={this.state.editing ? this.state.username : ''}
+                            onChange={this.handleChange}
                             inputProps={{
                                 'aria-label': 'name',
                             }}
                         />
-
                         {
                             this.state.editing &&
-                            <IconButton onClick={this.handleEdit}>
+                            <IconButton className={classes.static} onClick={this.handleEdit}>
                                 <CloseIcon/>
                             </IconButton>
                         }
                         {
                             !this.state.editing &&
-                            <IconButton onClick={this.handleEdit}>
+                            <IconButton className={classes.static} onClick={this.handleEdit}>
                                 <EditIcon/>
                             </IconButton>
                         }
@@ -91,6 +97,10 @@ class PlayerScoreCard extends React.Component {
 
 
 const styles = {
+    static: {
+        position: 'absolute',
+        right: 0
+    },
     testShow: {
         paddingLeft: '8px',
         paddingTop: '4px',
@@ -111,17 +121,19 @@ const styles = {
         fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
         lineHeight: '1.20588em',
         marginLeft: '-.04em',
-        padding: '0'
+        padding: '4px 0 0 0'
     },
     underlineShow: {
         flex: 1,
         transition: 'flex 500ms',
-        marginLeft: '8px'
+        marginLeft: '8px',
+        marginRight: '8px'
     },
     underlineHide: {
         flex: 0,
         transition: 'flex 500ms',
-        marginLeft: '8px'
+        marginLeft: '8px',
+        marginRight: '8px'
     },
     card: {
         width: 300,
