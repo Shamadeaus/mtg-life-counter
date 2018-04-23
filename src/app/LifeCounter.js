@@ -1,8 +1,5 @@
 import React from 'react'
 import PlayerScoreCard from './components/PlayerScoreCard'
-import SettingsButton from './SettingsButton'
-import Toolbar from 'material-ui/Toolbar'
-import Divider from 'material-ui/Divider'
 
 class LifeCounter extends React.Component {
     state = {
@@ -19,11 +16,6 @@ class LifeCounter extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Toolbar>
-                    <div style={{flex: 1}}/>
-                    <SettingsButton/>
-                </Toolbar>
-                <Divider/>
                 <div style={{display: 'flex', flexDirection: 'row'}}>
                     <PlayerScoreCard/>
                     <PlayerScoreCard/>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { withStyles } from 'material-ui/styles'
+import {withStyles} from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import Dialog from 'material-ui/Dialog'
 import AppBar from 'material-ui/AppBar'
@@ -9,14 +9,34 @@ import Typography from 'material-ui/Typography'
 import CloseIcon from 'material-ui-icons/Close'
 import Slide from 'material-ui/transitions/Slide'
 import SettingIcon from 'material-ui-icons/Settings'
+import Select from 'material-ui/Select'
+import FormControl from 'material-ui/Form/FormControl'
+import InputLabel from 'material-ui/Input/InputLabel'
+import MenuItem from 'material-ui/Menu/MenuItem'
+import FormControlLabel from 'material-ui/Form/FormControlLabel'
+import Switch from 'material-ui/Switch/Switch'
+import Input from 'material-ui/Input/Input'
 
 class Setup extends React.Component {
     state = {
-        open: false
+        open: false,
+        players: 2,
+        edh: false,
+        poison: false,
+        custom: false,
+        customAmount: 0
     }
 
     handleOpen = () => this.setState({open: true})
     handleClose = () => this.setState({open: false})
+    handleSubmit = () => {}
+
+    handleChange = event => {
+        this.setState({ [event.target.name]: event.target.value })
+    }
+
+    handleGameTypeChange = name => event => this.setState({[name]: event.target.checked})
+    handleCustomCounter = event => this.setState({customAmount: event.target.value})
 
     render() {
         const {classes} = this.props
@@ -44,7 +64,66 @@ class Setup extends React.Component {
                             </Button>
                         </Toolbar>
                     </AppBar>
-                    <div/>
+                    <form onSubmit={this.handleSubmit}>
+                        <FormControl>
+                            <InputLabel htmlFor='id-players'>Players</InputLabel>
+                        <Select
+                            onChange={this.handleChange}
+                            value={this.state.players}
+                            inputProps={{
+                                name: 'players',
+                                id: 'id-players'
+                            }}
+                            disabled={!this.state.edh}
+                        >
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                            <MenuItem value={5}>5</MenuItem>
+                            <MenuItem value={6}>6</MenuItem>
+                            <MenuItem value={7}>7</MenuItem>
+                            <MenuItem value={8}>8</MenuItem>
+                        </Select>
+                        </FormControl>
+                        <FormControlLabel
+                            control={
+                            <Switch
+                                checked={this.state.edh}
+                                onChange={this.handleGameTypeChange('edh')}
+                                color='primary'
+                            />
+                        }
+                            label='Commander/EDH'
+                        />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={this.state.poison}
+                                    onChange={this.handleGameTypeChange('poison')}
+                                    color='primary'
+                                />
+                            }
+                            label='Poison'
+                        />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={this.state.custom}
+                                    onChange={this.handleGameTypeChange('custom')}
+                                    color='primary'
+                                />
+                            }
+                            label='Custom Counters'
+                        />
+                        <FormControl>
+                            <InputLabel htmlFor='id-counter-amount'>Amount</InputLabel>
+                            <Input id='id-counter-amount'
+                                   value={this.state.customAmount}
+                                   onChange={this.handleChange}
+                                   disabled={!this.state.custom}
+                            />
+                        </FormControl>
+                    </form>
                 </Dialog>
             </React.Fragment>
         )

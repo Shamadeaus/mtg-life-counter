@@ -9,6 +9,7 @@ import Drawer from 'material-ui/Drawer'
 import {MenuItem} from 'material-ui/Menu'
 import {ListItemText} from 'material-ui/List'
 import {withStyles} from 'material-ui/styles'
+import SettingsButton from '../SettingsButton'
 
 class NavBar extends React.Component {
     state = {
@@ -32,6 +33,7 @@ class NavBar extends React.Component {
                         <IconButton href='https://github.com/Shamadeaus/mtg-life-counter'>
                             <GitHubIcon/>
                         </IconButton>
+                        <SettingsButton/>
                     </Toolbar>
                 </AppBar>
 
