@@ -12,7 +12,7 @@ class PlayerScoreCard extends React.Component {
     state = {
         lifeTotal: 40,
         editing: false,
-        username: 'Name'
+        username: `Player ${this.props.playerNum+1}`
     }
 
     handleEdit = () => {
@@ -22,10 +22,10 @@ class PlayerScoreCard extends React.Component {
     handleChange = event => this.setState({username: event.target.value})
 
     render() {
-        const {classes, ...props} = this.props
+        const {classes} = this.props
 
         return (
-            <Card className={classes.card} {...props}>
+            <Card className={classes.card}>
                 <div>
                     <div style={{display: 'flex', flexDirection: 'row', position: 'relative'}}>
                         <Typography variant='display1' className={this.state.editing ? classes.testHide : classes.testShow}>
